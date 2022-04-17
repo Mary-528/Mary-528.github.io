@@ -1,35 +1,147 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!DOCTYPE html>
 <html>
 <head>
-  <title>My first styled page</title>
-  <link rel="stylesheet" href="mystyle.css">
+   <meta charset="utf-8" />
+   <title>拼图游戏</title>
+   <style>
+       .first{
+           width: 150px;
+           height: 150px;
+           background-color: black;
+           float: left;
+           font-size: 30px;
+           border: 5px solid white;
+       }
+       .second{
+           width: 150px;
+           height: 150px;
+           background-color: green;
+           float: left;
+           font-size: 30px;
+           border: 5px solid white;
+       }
+       .third{
+           width: 150px;
+           height: 150px;
+           background-color: rebeccapurple;
+           float: left;
+           font-size: 30px;
+           border: 5px solid white;
+       }
+       .white{
+           width: 150px;
+           height: 150px;
+           background-color: rebeccapurple;
+           float: left;
+           font-size: 30px;
+           border: 5px solid white;
+       }
+   </style>
+   <script>
+   function playerName(){
+       var name = prompt("What's your name?");
+       alert("Hello"+ name + ",welcome to this puzzle game!");
+   }
+   playerName();
+       function reset(){
+           document.getElementById(19).innerHTML = '';
+           let arrid = [7,8,9,12,13,14,17,18];
+           let arr = [];
+           while(arr.length<8){
+               let ran = Math.round(Math.random()*10)+1;
+               if(arr.indexOf(ran)<0 && ran<9){
+                   arr.push(ran);
+
+               }
+           }
+           for(i=0;i<arrid.length;i++){
+               document.getElementById(arrid[i]).innerHTML = arr[i];
+           }
+       }
+       function change(id){
+           let temp = id ;
+           let tempvalue = document.getElementById(id).innerHTML;
+           let arr = [7,8,9,12,13,14,17,18,19];
+           let arrtemp = [id+1,id-1,id+5,id-5];
+           for(let i=0;i<arrtemp.length;i++){
+               if(arr.indexOf(arrtemp[i])>= 0){
+                   if (!document.getElementById(arrtemp[i]).innerHTML){
+                       document.getElementById(arrtemp[i]).innerHTML = tempvalue;
+                       document.getElementById(temp).innerHTML = '';
+                   }
+               }
+           }
+           checkResult();
+       }
+       function checkResult(){
+           let arr = [7,8,9,12,13,14,17,18];
+           let pass = [1,2,3,4,5,6,7,8];
+           for(let i=0;i<arr.length; i++){
+               let temp = document.getElementById(arr[i]).innerHTML;
+               if(pass[i] == temp){
+                   if(i == 7){
+                       reset();
+                       alert('恭喜您成功通关');
+                   }
+               }else break;
+
+           }
+       }
+       function pass(){
+           alert('小tips：点我一键通关！');
+           let arr =[1,2,3,4,5,6,7,8];
+           let arrid = [7,8,9,12,13,14,17,18];
+           for(i=0;i<arrid.length;i++){
+               document.getElementById(arrid[i]).innerHTML = arr[i];
+           }
+           document.getElementById(19).innerHTML = '';
+       }
+
+       function back(){
+           window.location.href = '/newPage';
+       }
+   </script>
 </head>
-
-<body>
-
-<!-- Site navigation menu -->
-<ul class="navbar">
-  <li><a href="https://baidu.com">Home page</a>
-  <li><a href="musings.html">Musings</a>
-  <li><a href="town.html">My town</a>
-  <li><a href="links.html">Links</a>
-</ul>
-
-<!-- Main content -->
-<h1>My first styled page</h1>
-
-<p>Welcome to my styled page!
-
-<p>It lacks images, but at least it has style.
-And it has links, even if they don't go
-anywhere&hellip;
-
-<p>There should be more here, but I don't know
-what yet.
-
-<!-- Sign and date the page, it's only polite! -->
-<address>Made 5 April 2004<br>
-  by myself.</address>
-
+<body onload="reset()">
+   <div style="float: left;">
+   <div style=" width: 480px;">
+       <h2 style="text-align: center; color: palevioletred" onclick="pass()">欢迎来到拼图小游戏</h2>
+       <p>游戏说明：点击空白格附近的有数字的方块，可以使得空白方块与点击的方块交换位置！<br>
+           <b>通关目标:</b>实现左上角到右下角的数字排序为1,2,3,4,5,6,7,8!
+       </p >
+   </div>
+   <div style=" width: 480px; height: 480px;">
+       <div class="first"  onclick="change(7)">
+           <p id="7" style="text-align: center; color: white;">1</p >
+       </div>
+       <div class="first" onclick="change(8)">
+           <p id="8" style="text-align: center; color: white;">2</p >
+       </div>
+       <div class="first" onclick="change(9)">
+           <p id="9" style="text-align: center; color: white;" >3</p >
+       </div>
+       <div class="second" onclick="change(12)">
+           <p id="12" style="text-align: center; color: white;">4</p >
+       </div>
+       <div class="second" onclick="change(13)">
+           <p id="13" style="text-align: center; color: white;">5</p >
+       </div>
+       <div class="second" onclick="change(14)">
+           <p id="14" style="text-align: center; color: white;">6</p >
+       </div>
+       <div class="third" onclick="change(17)">
+           <p id="17" style="text-align: center; color: white;">7</p >
+       </div>
+       <div class="third" onclick="change(18)">
+           <p id="18" style="text-align: center; color: white;"></p >
+       </div>
+       <div class="white" onclick="change(19)">
+           <p id="19" style="text-align: center; color: white;"></p >
+       </div>
+   </div>
+   <div>
+       <h3 style="width: 480px; text-align: center" onclick="reset()">点我重置游戏</h3>
+   </div>
+   </div>
 </body>
 </html>
